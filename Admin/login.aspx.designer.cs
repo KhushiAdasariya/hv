@@ -32,7 +32,7 @@ namespace hv.Admin
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtuse;
 
-        /// <summary>
+        /// <summary>   
         /// txtped control.
         /// </summary>
         /// <remarks>
