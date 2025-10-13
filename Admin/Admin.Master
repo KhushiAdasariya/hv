@@ -1,0 +1,200 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="hv.Admin.Admin" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>
+        <asp:ContentPlaceHolder ID="PageTitle" runat="server">Admin Panel - Hidden Valley</asp:ContentPlaceHolder>
+    </title>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial,sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        header {
+            background: #2c3e50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 40px;
+            color: #fff;
+        }
+
+            header .logo img {
+                height: 80px;
+            }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+            nav a {
+                text-decoration: none;
+                color: #fff;
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+                nav a:hover {
+                    color: #7c8b38;
+                }
+
+        .logout-btn {
+            text-decoration: none;
+            padding: 10px 20px;
+            background: #c0392b;
+            color: #fff;
+            border-radius: 4px;
+            transition: 0.3s;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+            .logout-btn:hover {
+                background: #fff;
+                color: #c0392b;
+            }
+
+        footer {
+            background: #2c3e50;
+            color: #fff;
+            padding: 40px 20px;
+            margin-top: 40px;
+            font-size: 16px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .footer-logo img {
+            height: 80px;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo p {
+            font-size: 16px;
+            color: #ddd;
+        }
+
+        .footer-links h4, .footer-contact h4 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+            .footer-links ul li {
+                margin-bottom: 12px;
+            }
+
+                .footer-links ul li a {
+                    text-decoration: none;
+                    color: #ddd;
+                    font-size: 16px;
+                }
+
+                    .footer-links ul li a:hover {
+                        color: #7c8b38;
+                    }
+
+        .footer-contact p {
+            font-size: 16px;
+            margin: 12px 0;
+            color: #ddd;
+            line-height: 1.6;
+        }
+
+        .footer-contact i {
+            margin-right: 8px;
+            color: #7c8b38;
+        }
+
+        .footer-bottom {
+            margin-top: 30px;
+            border-top: 1px solid #444;
+            text-align: center;
+            padding-top: 15px;
+            font-size: 15px;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <!-- HEADER -->
+        <header>
+            <div class="logo">
+                <img src="../img/hiidee.png" alt="Hidden Valley Resort" />
+            </div>
+            <nav>
+                <a href="Dashboard.aspx">Dashboard</a>
+                <a href="Manageregisteration.aspx">Users</a>
+
+                <a href="ManageRooms.aspx">Manage Rooms</a>
+                <a href="ManageBookings.aspx">Manage Bookings</a>
+                <a href="ManageWedding.aspx">Wedding & Events</a>
+                <a href="Reports.aspx">Reports</a>
+            </nav>
+            <div>
+                <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutPageUrl="../User/index.aspx" CssClass="logout-btn" />
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <img src="../img/hiidee.png" alt="Hidden Valley Resort" />
+                    <p>Hidden Valley Resort - Admin Panel</p>
+                </div>
+                <div class="footer-links">
+                    <h4>ADMIN LINKS</h4>
+                    <ul>
+                        <li><a href="Dashboard.aspx">Dashboard</a></li>
+                        <li><a href="ManageRooms.aspx">Manage Rooms</a></li>
+                        <li><a href="ManageBookings.aspx">Manage Bookings</a></li>
+                        <li><a href="Reports.aspx">Reports</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>SUPPORT</h4>
+                    <p>
+                        <i>📞</i> +91 72260 10000<br />
+                        +91 99251 36262
+                    </p>
+                    <p><i>📧</i> support@hiddenvalley.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">© 2025 Hidden Valley Resort Admin Panel. All Rights Reserved.</div>
+        </footer>
+
+    </form>
+</body>
+</html>

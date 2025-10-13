@@ -1,0 +1,218 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="User.master.cs" Inherits="hv.User.User" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>
+        <asp:ContentPlaceHolder ID="PageTitle" runat="server">Hidden Valley</asp:ContentPlaceHolder>
+    </title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>
+        /* BODY AND FLEX LAYOUT */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1; /* This is the key to making the footer sticky */
+        }
+
+        /* HEADER */
+        header {
+            background: #2c3e50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 40px;
+            color: #fff;
+        }
+
+        header .logo img {
+            height: 80px;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #7c8b38;
+        }
+
+        /* BUTTONS CONTAINER */
+        .header-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* This adds space between the two buttons */
+        }
+        
+        /* BUTTON STYLES */
+        .header-btn, .header-btn-asp {
+            text-decoration: none;
+            padding: 10px 20px;
+            background: #7c8b38;
+            color: #fff;
+            border-radius: 4px;
+            transition: 0.3s;
+            font-size: 15px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap; /* Prevents button text from wrapping */
+        }
+
+        .header-btn:hover, .header-btn-asp:hover {
+            background: #fff;
+            color: #2c3e50;
+        }
+        
+        /* FOOTER */
+        footer {
+            background: #2c3e50;
+            color: #fff;
+            padding: 40px 20px;
+            font-size: 16px;
+            margin-top: auto; /* This pushes the footer to the bottom */
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .footer-logo img {
+            height: 80px;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo p {
+            font-size: 16px;
+            color: #ddd;
+        }
+
+        .footer-links h4, .footer-contact h4 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links ul li a {
+            text-decoration: none;
+            color: #ddd;
+            font-size: 16px;
+        }
+
+        .footer-links ul li a:hover {
+            color: #7c8b38;
+        }
+
+        .footer-contact p {
+            font-size: 16px;
+            margin: 12px 0;
+            color: #ddd;
+            line-height: 1.6;
+        }
+
+        .footer-contact i {
+            margin-right: 8px;
+            color: #7c8b38;
+        }
+
+        .footer-bottom {
+            margin-top: 30px;
+            border-top: 1px solid #444;
+            text-align: center;
+            padding-top: 15px;
+            font-size: 15px;
+            color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="form1" runat="server">
+        <header>
+            <div class="logo">
+                <img src="../img/hiidee.png" alt="Hidden Valley Resort" />
+            </div>
+            <nav>
+                <a href="index.aspx">Home</a>
+                <a href="about.aspx">About Us</a>
+                <a href="rooms.aspx">Rooms</a>
+                <a href="dinning.aspx">Dinning</a>
+                <a href="amenities.aspx">Amenities</a>
+                <a href="gallery.aspx">Gallery</a>
+                <a href="wedding.aspx">Wedding & Events</a>
+                <a href="contact.aspx">Contact</a>
+            </nav>
+            <div class="header-buttons">
+                <a href="booking.aspx" class="header-btn">Book Now</a>
+                <asp:Panel ID="pnlUserControls" runat="server">
+                    <asp:Button ID="btnUserAction" runat="server" Text="Login" OnClick="btnUserAction_Click" CssClass="header-btn-asp" />
+                </asp:Panel>
+            </div>
+        </header>
+
+        <main>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID="BookNowSection" runat="server"></asp:ContentPlaceHolder>
+        </main>
+
+        <footer>
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <img src="img/hiidee.png" alt="Hidden Valley Resort" />
+                    <p>Hidden Valley Resort</p>
+                </div>
+                <div class="footer-links">
+                    <h4>QUICK LINKS</h4>
+                    <ul>
+                        <li><a href="about.aspx">About</a></li>
+                        <li><a href="wedding.aspx">Wedding</a></li>
+                        <li><a href="dinning.aspx">Dinning</a></li>
+                        <li><a href="rooms.aspx">Rooms</a></li>
+                        <li><a href="contact.aspx">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>CONTACT INFO</h4>
+                    <p><i>📍</i> Hidden Valley Resort,<br />
+                        Jashoda Mehmdabad Highway,<br />
+                        Hathijan, Ahmedabad, Gujarat 382445</p>
+                    <p><i>📞</i> +91 72260 10000<br />
+                        +91 99251 36262<br />
+                        +91 81406 26250 (Dining)</p>
+                </div>
+            </div>
+            <div class="footer-bottom">© 2025 Hidden Valley Resort. All Rights Reserved.</div>
+        </footer>
+    </form>
+</body>
+</html>
