@@ -12,26 +12,31 @@ namespace hv.Admin
 {
     public partial class Manageregisteration : System.Web.UI.Page
     {
-        string s = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
-
+        String s = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+        SqlConnection con;
+        SqlDataAdapter da;
+        DataSet ds;
+        SqlCommand cmd;
+        int i;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                BindGrid();
-            }
+            getcon();
+            fillregister();
         }
-        private void BindGrid()
+        void getcon()
         {
-            using (SqlConnection con = new SqlConnection(s))
+            con = new SqlConnection(s);
+            con.Open();
+        }
+        void fillregister()
+        {
+            getcon();
+            da = new SqlDataAdapter("select * from sd_tbl", con);
+            ds = new DataSet();
+            da.Fill(ds);
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
-                string query = "SELECT Id, Name, Gender, Mobile_no, Email, City, State FROM stu_tbl";
-                SqlDataAdapter da = new SqlDataAdapter(query, con);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                GridView1.DataSource = dt;   
-                GridView1.DataBind();
+                dldt.Items.Add(ds.Tables[0].Rows[i][1].ToString());
             }
         }
 

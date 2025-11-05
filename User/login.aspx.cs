@@ -14,55 +14,53 @@ namespace hv.User
     {
         string s = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
 
+        SqlConnection con;
+        SqlDataAdapter da;
+        DataSet ds;
+        SqlCommand cmd;
+        int i;
         protected void Page_Load(object sender, EventArgs e)
         {
+            getcon();
+            if (Session["user"] != null)
+            {
+                Response.Redirect("Webform1.aspx");
+            }
 
         }
-
+        void getcon()
+        {
+            con = new SqlConnection(s);
+            con.Open();
+        }
         protected void Button1_Click(object sender, EventArgs e)
         {
-            string email = txtunm.Text;
-            string password = txtpwd.Text;
-
-            if (email == "" || password == "")
+            if (txtunm.Text != null && txtpwd.Text != null)
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
-                lblMessage.Text = "Please enter both email and password.";
-                return;
-            }
+                getcon();
+                cmd = new SqlCommand("select * from car_tbl where Email='" + txtunm.Text + "' and Password='" + txtpwd.Text + "'", con);
+                da = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                da.Fill(ds);
 
-            try
-            {
-                using (SqlConnection con = new SqlConnection(s))
+                i = Convert.ToInt32(cmd.ExecuteScalar());
+
+                if (i > 0)
                 {
-                    con.Open();
-
-                    // This is your original query method (string concatenation).
-                    SqlCommand cmd = new SqlCommand("select count(*) from stu_tbl where Email='" + email + "' and Password='" + password + "'", con);
-
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
-
-                    // in login.aspx.cs
-                    // ...
-                    if (count > 0)
-                    {
-                        Session["username"] = email;
-                        Session["UserType"] = "User";
-                        Response.Redirect("~/User/index.aspx"); 
-                    }
-                    // ...
-                    else
-                    {
-                        lblMessage.ForeColor = System.Drawing.Color.Red;
-                        lblMessage.Text = "Invalid email or password.";
-                    }
+                    Session["user"] = txtunm.Text;
+                    Session["UserLoggedIn"] = true;
+                    Response.Redirect("Webform1.aspx");
+                }
+                else
+                {
+                    Response.Write("<script>alert('Invalid Email or Password')</script>");
                 }
             }
-            catch (Exception ex)
+            else
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
-                lblMessage.Text = "Error: " + ex.Message;
+                Response.Write("<script>alert('Please enter Email and Password')</script>");
             }
         }
     }
 }
+   

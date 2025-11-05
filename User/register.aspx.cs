@@ -37,14 +37,13 @@ namespace hv.User
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+          
             if (Button1.Text == "Register")
             {
                 getcon();
                 cmd = new SqlCommand("insert into stu_tbl(Name,Gender,Mobile_no,Email,Password,Confirm_Password,City,State)" + "Values('" + txtnm.Text + "','" + rdbgen.Text + "','" + txtmn.Text + "','" + txtunm.Text + "','" + txtpwd.Text + "','" + txtcpas.Text + "','" + dblct.SelectedValue + "','" + ddl.SelectedValue + "')", con);
                 cmd.ExecuteNonQuery();
                 clear();
-                // After successful registration
-                Session["username"] = txtunm.Text.Trim(); // txtName is the Name input field
                 Response.Redirect("index.aspx"); // redirect to home or user dashboard
 
 
