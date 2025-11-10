@@ -14,24 +14,25 @@ namespace hv.Admin
 {
     public partial class addroom : System.Web.UI.Page
     {
+
+
+
+
        
-           
-    
        
-            String s = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+            string s = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
             SqlConnection con;
+            SqlCommand cmd;
             SqlDataAdapter da;
             DataSet ds;
-            SqlCommand cmd;
             String fnm;
-            int i;
 
             protected void Page_Load(object sender, EventArgs e)
             {
                 getcon();
                 if (!IsPostBack)
                 {
-                    fillRoomType();
+                    fillgrid();
                 }
             }
 
@@ -41,57 +42,104 @@ namespace hv.Admin
                 con.Open();
             }
 
-            void fillRoomType()
+            void clear()
+            {
+                txtRoomType.Text = "";
+                txtRoomNumber.Text = "";
+                txtDescription.Text = "";
+                txtPrice.Text = "";
+                txtCapacity.Text = "";
+            }
+
+        void imgupload()
+        {
+            if (fldimg.HasFile)
+            {
+                fnm = "images/" + fldimg.FileName;   // ✔ Correct path
+                fldimg.SaveAs(Server.MapPath("~/" + fnm));
+            }
+        }
+
+
+        void fillgrid()
             {
                 getcon();
-                da = new SqlDataAdapter("select * from roomtype_tbl", con);
+                da = new SqlDataAdapter("SELECT * FROM Rooms_Admin_tbl", con);
                 ds = new DataSet();
                 da.Fill(ds);
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                GridView1.DataSource = ds;
+                GridView1.DataBind();
+            }
+
+            protected void btnSave_Click(object sender, EventArgs e)
+            {
+                if (btnSave.Text == "Save Room")
                 {
-                    drpRoomType.Items.Add(ds.Tables[0].Rows[i][1].ToString());
+                    getcon();
+                    imgupload();
+
+                    cmd = new SqlCommand("INSERT INTO Rooms_Admin_tbl (RoomType, RoomNumber, Description, Price, Capacity, Status, Image) VALUES('" +
+                        txtRoomType.Text + "', '" + txtRoomNumber.Text + "', '" + txtDescription.Text + "', '" +
+                        txtPrice.Text + "', '" + txtCapacity.Text + "', '" + ddlStatus.SelectedItem.Text + "', '" + fnm + "')", con);
+
+                    cmd.ExecuteNonQuery();
+                    clear();
+                    fillgrid();
+                }
+                else
+                {
+                    getcon();
+                    cmd = new SqlCommand("UPDATE Rooms_Admin_tbl SET RoomType='" + txtRoomType.Text +
+                        "', RoomNumber='" + txtRoomNumber.Text +
+                        "', Description='" + txtDescription.Text +
+                        "', Price='" + txtPrice.Text +
+                        "', Capacity='" + txtCapacity.Text +
+                        "', Status='" + ddlStatus.SelectedItem.Text +
+                        "' WHERE Id='" + ViewState["id"] + "'", con);
+
+                    cmd.ExecuteNonQuery();
+                    clear();
+                    fillgrid();
+                    btnSave.Text = "Save Room";
                 }
             }
 
-            void uploadImg()
-            {
-
-
-                fnm = "img/" + fldim.FileName;
-                fldim.SaveAs(Server.MapPath(fnm));
-
-            }
-
-
-            void clear()
-            {
-                drpRoomType.SelectedIndex = 0;
-                txtRoomName.Text = "";
-                txtRoomDesc.Text = "";
-            }
-
-            protected void btnAddRoom_Click(object sender, EventArgs e)
+            void select()
             {
                 getcon();
-                uploadImg();
-
-                cmd = new SqlCommand("INSERT INTO room_tbl (roomtype_id, RoomName, RoomDesc, RoomImage) VALUES ('"
-                                     + drpRoomType.SelectedIndex + "','"
-                                     + txtRoomName.Text + "','"
-                                     + txtRoomDesc.Text + "','"
-                                     + fnm + "')", con);
-                cmd.ExecuteNonQuery();
-                Response.Write("<script>alert('Room added successfully!!!')</script>");
-                clear();
-            }
-
-            protected void drpRoomType_SelectedIndexChanged(object sender, EventArgs e)
-            {
-
-                da = new SqlDataAdapter("select * from room_tbl where roomtype_id = '" + drpRoomType.SelectedIndex + "'", con);
+                da = new SqlDataAdapter("SELECT * FROM Rooms_Admin_tbl WHERE Id='" + ViewState["id"] + "'", con);
                 ds = new DataSet();
                 da.Fill(ds);
-                ViewState["RoomID"] = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
+
+                txtRoomType.Text = ds.Tables[0].Rows[0]["RoomType"].ToString();
+                txtRoomNumber.Text = ds.Tables[0].Rows[0]["RoomNumber"].ToString();
+                txtPrice.Text = ds.Tables[0].Rows[0]["Price"].ToString();
+                txtCapacity.Text = ds.Tables[0].Rows[0]["Capacity"].ToString();
+                txtDescription.Text = ds.Tables[0].Rows[0]["Description"].ToString();
+                ddlStatus.SelectedValue = ds.Tables[0].Rows[0]["Status"].ToString();
+            }
+
+            protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+            {
+                // ------ EDIT -------
+                if (e.CommandName == "cmd_edt")
+                {
+                    int id = Convert.ToInt32(e.CommandArgument);
+                    ViewState["id"] = id;
+                    btnSave.Text = "Update";
+                    select();
+                }
+
+                // ------ DELETE -------
+                if (e.CommandName == "cmd_dlt")
+                {
+                    int id = Convert.ToInt32(e.CommandArgument);
+                    getcon();
+                    cmd = new SqlCommand("DELETE FROM Rooms_Admin_tbl WHERE Id='" + id + "'", con);
+                    cmd.ExecuteNonQuery();
+                    fillgrid();   // refresh grid after delete
+                }
             }
         }
     }
+

@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 using System.Web.UI.WebControls;
 
 namespace hv.User
@@ -12,75 +12,79 @@ namespace hv.User
         SqlConnection con;
         SqlDataAdapter da;
         DataSet ds;
-        SqlCommand cmd;
-        string fnm;
-        PagedDataSource pg = new PagedDataSource();
-        int row, p;
+
+        int pagesize = 6;   // 6 rooms per page
+        static int pageindex = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            getcon();
             if (!IsPostBack)
             {
-                ViewState["rid"] = 0;
+                filllist();
             }
-            filllist();
-            //imgupload();
         }
+
         void getcon()
         {
             con = new SqlConnection(s);
             con.Open();
         }
 
-        protected void LinkButton1_Click(object sender, EventArgs e)
-        {
-            int currentpage = Convert.ToInt32(ViewState["rid"]);
-            currentpage--;
-            ViewState["rid"] = currentpage;
-            filllist();
-        }
-
-        protected void LinkButton2_Click(object sender, EventArgs e)
-        {
-            int currentpage = Convert.ToInt32(ViewState["rid"]);
-            currentpage++;
-            ViewState["rid"] = currentpage;
-            filllist();
-        }
-
-        protected void DataList1_ItemCommand(object source, DataListCommandEventArgs e)
-        {
-            if (e.CommandName == "cmd_view")
-            {
-                int id = Convert.ToInt32(e.CommandArgument);
-                Response.Redirect("ViewDetails.aspx?id=" + id);
-            }
-        }
-
         void filllist()
         {
-           
-
-            da = new SqlDataAdapter("select * from room_tbl", con);
+            getcon();
+            da = new SqlDataAdapter("SELECT * FROM Rooms_Admin_tbl ORDER BY Id DESC", con);
             ds = new DataSet();
             da.Fill(ds);
 
-            row = ds.Tables[0].Rows.Count;
-            pg = new PagedDataSource();
+            // PAGINATION LOGIC
+            PagedDataSource pds = new PagedDataSource();
+            pds.DataSource = ds.Tables[0].DefaultView;
+            pds.AllowPaging = true;
+            pds.PageSize = pagesize;
+            pds.CurrentPageIndex = pageindex;
 
-            pg.AllowPaging = true;
-            pg.PageSize = 2;
-            pg.CurrentPageIndex = Convert.ToInt32(ViewState["rid"]);
+            // Enable/Disable Buttons
+            lnkprev.Enabled = !pds.IsFirstPage;
+            lnknxt.Enabled = !pds.IsLastPage;
 
-            lnkprev.Enabled = !pg.IsFirstPage;
-            lnknxt.Enabled = !pg.IsLastPage;
-
-            pg.DataSource = ds.Tables[0].DefaultView;
-            DataList1.DataSource = pg;
+            DataList1.DataSource = pds;
             DataList1.DataBind();
         }
-       
 
+        // Previous Button
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            if (pageindex > 0)
+            {
+                pageindex--;
+                filllist();
+            }
+        }
+
+        // Next Button
+        protected void LinkButton2_Click(object sender, EventArgs e)
+        {
+            pageindex++;
+            filllist();
+        }
+
+        // BOOK NOW + VIEW DETAILS
+        protected void DataList1_ItemCommand(object source, DataListCommandEventArgs e)
+        {
+            // BOOK NOW
+            if (e.CommandName == "cmd_book")
+            {
+                string id = e.CommandArgument.ToString();
+                Response.Redirect("bookroom.aspx?id=" + id);
+            }
+
+            // VIEW DETAILS
+            if (e.CommandName == "cmd_view")
+            {
+                string id = e.CommandArgument.ToString();
+                Response.Redirect("roomdetails.aspx?id=" + id);
+            }
+        }
     }
 }

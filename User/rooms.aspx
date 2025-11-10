@@ -6,128 +6,102 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
     <style>
-        /* 🌿 General Layout */
         body {
-            background: #f7f8fa;
+            background: #eef1f5;
             font-family: 'Segoe UI', sans-serif;
         }
-
         h2 {
             font-weight: 600;
-            color: #333;
+            color: #222;
             margin-bottom: 25px;
         }
-
-        /* 🏠 Room Card Styling */
         .room-box {
             border: none;
-            border-radius: 15px;
+            border-radius: 18px;
             overflow: hidden;
             background: #fff;
             margin: 20px;
-            width: 300px;
+            width: 310px;
             display: inline-block;
             vertical-align: top;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.12);
         }
-
         .room-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 18px rgba(0,0,0,0.15);
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.18);
         }
-
         .room-box img {
             width: 100%;
-            height: 200px;
+            height: 210px;
             object-fit: cover;
-            border-bottom: 3px solid #007bff;
         }
-
         .room-name {
             font-size: 20px;
             font-weight: 700;
-            color: #222;
-            margin-top: 12px;
+            color: #111;
+            padding: 12px 10px 0;
         }
-
         .room-desc {
             font-size: 15px;
-            color: #555;
+            color: #444;
             margin: 10px 0;
-            padding: 0 10px;
-            min-height: 60px;
+            padding: 0 12px;
+            min-height: 65px;
         }
 
-        .room-buttons {
-            padding-bottom: 15px;
-        }
-
-        /* 🎨 Buttons */
         .btn-custom {
             display: inline-block;
             background: #007bff;
             color: white !important;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 6px;
+            padding: 9px 20px;
+            border-radius: 7px;
             text-decoration: none;
-            margin: 5px;
             font-size: 14px;
             cursor: pointer;
-            transition: 0.3s ease;
+            margin: 4px;
+            border: none;
+            transition: 0.25s;
         }
-
         .btn-custom:hover {
             background: #0056b3;
-            transform: scale(1.05);
         }
-
         .btn-outline {
-            background: white;
+            background: white !important;
             color: #007bff !important;
             border: 1px solid #007bff;
         }
-
         .btn-outline:hover {
-            background: #007bff;
+            background: #007bff !important;
             color: white !important;
         }
 
-        /* 🔢 Pagination */
         .pagination {
             text-align: center;
-            margin-top: 30px;
+            margin: 25px 0;
         }
-
         .pagination a,
         .pagination asp\:LinkButton {
             display: inline-block;
-            margin: 5px;
+            margin: 6px;
+            padding: 8px 18px;
+            font-size: 14px;
             background: #007bff;
             color: white !important;
-            padding: 8px 15px;
             border-radius: 6px;
-            font-size: 14px;
-            transition: 0.3s;
+            transition: 0.3s ease;
             text-decoration: none;
         }
-
         .pagination a:hover,
         .pagination asp\:LinkButton:hover {
             background: #0056b3;
         }
 
-        /* 📱 Responsive */
         @media (max-width: 768px) {
             .room-box {
                 width: 90%;
-                margin: 15px auto;
                 display: block;
-            }
-
-            .room-box img {
-                height: 180px;
+                margin: 20px auto;
             }
         }
     </style>
@@ -138,25 +112,60 @@
     <h2 style="text-align:center; margin-top:20px;">🏨 Available Rooms</h2>
 
     <div style="text-align:center;">
+
         <asp:DataList ID="DataList1" runat="server" RepeatDirection="Horizontal" RepeatColumns="3" OnItemCommand="DataList1_ItemCommand">
+
             <ItemTemplate>
+
                 <div class="room-box">
-                    <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("RoomImage") %>' AlternateText="Room Image" />
-                    <div class="room-name"><%# Eval("RoomName") %></div>
-                    <div class="room-desc"><%# Eval("RoomDesc") %></div>
-                    <div class="room-buttons">
-                        <asp:LinkButton ID="LinkButton3" runat="server" Text="Book Now" CssClass="btn-custom"></asp:LinkButton>
-                        <asp:LinkButton ID="LinkButton4" runat="server" Text="View Details" CssClass="btn-custom btn-outline"
-                            CommandArgument='<%# Eval("RoomID") %>' CommandName="cmd_view"></asp:LinkButton>
+
+                   <asp:Image ID="Image1" runat="server"
+           ImageUrl='<%# ResolveUrl(Eval("Image").ToString()) %>'
+           Width="100%" Height="200px" />
+
+
+
+                    <!-- Room Name -->
+                    <div class="room-name">
+                        <%# Eval("RoomType") %> - Room No: <%# Eval("RoomNumber") %>
                     </div>
+
+                    <!-- Description -->
+                    <div class="room-desc">
+                        <%# Eval("Description") %>
+                        <br />
+                        <b>Price:</b> ₹ <%# Eval("Price") %>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="room-buttons">
+
+                        <asp:LinkButton ID="btnBook" runat="server" Text="Book Now"
+                            CssClass="btn-custom"
+                            CommandName="cmd_book"
+                            CommandArgument='<%# Eval("Id") %>'>
+                        </asp:LinkButton>
+
+                        <asp:LinkButton ID="btnView" runat="server" Text="View Details"
+                            CssClass="btn-custom btn-outline"
+                            CommandName="cmd_view"
+                            CommandArgument='<%# Eval("Id") %>'>
+                        </asp:LinkButton>
+
+                    </div>
+
                 </div>
+
             </ItemTemplate>
+
         </asp:DataList>
 
+        <!-- Pagination -->
         <div class="pagination">
             <asp:LinkButton ID="lnkprev" runat="server" OnClick="LinkButton1_Click">⬅ Previous</asp:LinkButton>
             <asp:LinkButton ID="lnknxt" runat="server" OnClick="LinkButton2_Click">Next ➡</asp:LinkButton>
         </div>
+
     </div>
 
 </asp:Content>

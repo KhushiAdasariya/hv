@@ -34,22 +34,18 @@ namespace hv.Admin
             da = new SqlDataAdapter("select * from sd_tbl", con);
             ds = new DataSet();
             da.Fill(ds);
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            GridView1.DataSource = ds;
+            GridView1.DataBind();
+        }
+
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "cmd_edt")
             {
-                dldt.Items.Add(ds.Tables[0].Rows[i][1].ToString());
+                int id = Convert.ToInt16(e.CommandArgument);
+                ViewState["id"] = id;
+
             }
-        }
-
-        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            GridView1.PageIndex = e.NewPageIndex;
-            BindGrid();
-        }
-
-        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string id = (GridView1.SelectedRow.FindControl("Label1") as Label).Text;
-            Response.Write("Selected ID = " + id);
         }
     }
 }
