@@ -53,11 +53,9 @@ namespace hv.Admin
 
         void imgupload()
         {
-            if (fldimg.HasFile)
-            {
-                fnm = "images/" + fldimg.FileName;   // ✔ Correct path
-                fldimg.SaveAs(Server.MapPath("~/" + fnm));
-            }
+            fnm = "User/images/" + fldimg.FileName;
+            fldimg.SaveAs(Server.MapPath("~/" + fnm));
+
         }
 
 

@@ -13,7 +13,7 @@ namespace hv.User
         SqlDataAdapter da;
         DataSet ds;
 
-        int pagesize = 6;   // 6 rooms per page
+        int pagesize = 1;   // 6 rooms per page
         static int pageindex = 0;
 
         protected void Page_Load(object sender, EventArgs e)

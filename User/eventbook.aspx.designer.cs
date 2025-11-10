@@ -96,15 +96,6 @@ namespace hv.User
         protected global::System.Web.UI.WebControls.RadioButtonList rblGender;
 
         /// <summary>
-        /// rfvGender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvGender;
-
-        /// <summary>
         /// txtCity control.
         /// </summary>
         /// <remarks>
@@ -112,15 +103,6 @@ namespace hv.User
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCity;
-
-        /// <summary>
-        /// rfvCity control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCity;
 
         /// <summary>
         /// ddlState control.
@@ -132,15 +114,6 @@ namespace hv.User
         protected global::System.Web.UI.WebControls.DropDownList ddlState;
 
         /// <summary>
-        /// rfvState control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvState;
-
-        /// <summary>
         /// txtEventType control.
         /// </summary>
         /// <remarks>
@@ -148,15 +121,6 @@ namespace hv.User
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEventType;
-
-        /// <summary>
-        /// rfvEventType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEventType;
 
         /// <summary>
         /// txtEventDate control.
@@ -168,15 +132,6 @@ namespace hv.User
         protected global::System.Web.UI.WebControls.TextBox txtEventDate;
 
         /// <summary>
-        /// rfvEventDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEventDate;
-
-        /// <summary>
         /// txtEventTime control.
         /// </summary>
         /// <remarks>
@@ -184,15 +139,6 @@ namespace hv.User
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEventTime;
-
-        /// <summary>
-        /// rfvEventTime control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEventTime;
 
         /// <summary>
         /// ddlVenueName control.
@@ -204,15 +150,6 @@ namespace hv.User
         protected global::System.Web.UI.WebControls.DropDownList ddlVenueName;
 
         /// <summary>
-        /// rfvVenue control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvVenue;
-
-        /// <summary>
         /// txtGuests control.
         /// </summary>
         /// <remarks>
@@ -220,24 +157,6 @@ namespace hv.User
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtGuests;
-
-        /// <summary>
-        /// rfvGuests control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvGuests;
-
-        /// <summary>
-        /// revGuests control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator revGuests;
 
         /// <summary>
         /// ddlTheme control.
@@ -249,15 +168,6 @@ namespace hv.User
         protected global::System.Web.UI.WebControls.DropDownList ddlTheme;
 
         /// <summary>
-        /// rfvTheme control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTheme;
-
-        /// <summary>
         /// rblRoomsRequired control.
         /// </summary>
         /// <remarks>
@@ -265,15 +175,6 @@ namespace hv.User
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rblRoomsRequired;
-
-        /// <summary>
-        /// rfvRoomsReq control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvRoomsReq;
 
         /// <summary>
         /// txtRooms control.
@@ -285,15 +186,6 @@ namespace hv.User
         protected global::System.Web.UI.WebControls.TextBox txtRooms;
 
         /// <summary>
-        /// revRooms control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator revRooms;
-
-        /// <summary>
         /// txtCheckIn control.
         /// </summary>
         /// <remarks>
@@ -303,15 +195,6 @@ namespace hv.User
         protected global::System.Web.UI.WebControls.TextBox txtCheckIn;
 
         /// <summary>
-        /// rfvCheckIn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCheckIn;
-
-        /// <summary>
         /// txtCheckOut control.
         /// </summary>
         /// <remarks>
@@ -319,15 +202,6 @@ namespace hv.User
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCheckOut;
-
-        /// <summary>
-        /// rfvCheckOut control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCheckOut;
 
         /// <summary>
         /// btnSubmit control.

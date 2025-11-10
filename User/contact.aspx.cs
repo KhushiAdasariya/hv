@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace hv.User
 {
@@ -9,8 +14,10 @@ namespace hv.User
     {
         string s = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
 
-        SqlConnection con; 
-        SqlCommand cmd;    
+        SqlConnection con; // Connection
+        SqlDataAdapter da; // Container
+        DataSet ds; // Run-time container
+        SqlCommand cmd; // Insert, update, delete
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -33,24 +40,13 @@ namespace hv.User
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            if (txtName.Text.Trim() == "" || txtEmail.Text.Trim() == "" || txtPhone.Text.Trim() == "" || txtMessage.Text.Trim() == "")
+            if (btnSubmit.Text == "Send Message")
             {
-                Response.Write("<script>alert('Please fill all fields');</script>");
-                return;
-            }
-
-            try
-            {
-                cmd = new SqlCommand("INSERT INTO ContactMessages(Name, Email, Phone, Message) VALUES('" +
-                                      txtName.Text + "','" + txtEmail.Text + "','" + txtPhone.Text + "','" + txtMessage.Text + "')", con);
+                getcon();
+                cmd = new SqlCommand("INSERT INTO ContactMessages(Name, Email, Phone, Message) VALUES('" + txtName.Text + "','" + txtEmail.Text + "','" + txtPhone.Text + "','" + txtMessage.Text + "')", con);
                 cmd.ExecuteNonQuery();
-
-                Response.Write("<script>alert('Message sent successfully!');</script>");
                 clear();
-            }
-            catch (Exception ex)
-            {
-                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+                Response.Redirect("index.aspx"); // Redirect to home page after submission
             }
         }
     }

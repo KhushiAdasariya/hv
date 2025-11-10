@@ -45,7 +45,7 @@
             transition: 0.3s ease-in-out;
         }
 
-        .custom-gridview .select-button {
+        .custom-gridview .action-button {
             background: #2c3e50;
             color: white;
             border: none;
@@ -55,7 +55,7 @@
             transition: all 0.3s ease-in-out;
         }
 
-        .custom-gridview .select-button:hover {
+        .custom-gridview .action-button:hover {
             background: #1a252f;
         }
 
@@ -74,15 +74,10 @@
             <asp:GridView ID="GridView1" runat="server" CssClass="custom-gridview" 
                 AutoGenerateColumns="False" AllowPaging="true" PageSize="10"
                 OnPageIndexChanging="GridView1_PageIndexChanging"
-                OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+                OnRowCommand="GridView1_RowCommand">
 
                 <Columns>
-                    <asp:TemplateField HeaderText="Id">
-                        <ItemTemplate>
-                            <asp:Label ID="Label1" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-
+                    <asp:BoundField DataField="Id" HeaderText="ID" ReadOnly="true" />
                     <asp:BoundField DataField="Name" HeaderText="Name" />
                     <asp:BoundField DataField="Gender" HeaderText="Gender" />
                     <asp:BoundField DataField="Mobile_no" HeaderText="Mobile No" />
@@ -90,7 +85,13 @@
                     <asp:BoundField DataField="City" HeaderText="City" />
                     <asp:BoundField DataField="State" HeaderText="State" />
 
-                    
+                    <asp:TemplateField HeaderText="Action">
+                        <ItemTemplate>
+                            <asp:Button ID="btnEdit" runat="server" CssClass="action-button" Text="Edit" 
+                                CommandName="EditUser" CommandArgument='<%# Eval("Id") %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
                 </Columns>
             </asp:GridView>
         </div>

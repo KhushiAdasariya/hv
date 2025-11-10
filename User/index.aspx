@@ -4,76 +4,105 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
     <style>
-/* HERO */
-.hero-section {
-    position: relative;
-    height: 80vh;
-    background: url('../img/hero.jpg') no-repeat center/cover;
-    display: flex; align-items: center; justify-content: center;
-    color: white; text-align: center; margin: 40px;
-}
-.hero-section h1 {
-    font-size: 48px; text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-}
-body {
-    font-family: 'Segoe UI', Tahoma, Verdana, Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
 
-.info-section {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin: 60px 0;
-    font-family: 'Segoe UI', Tahoma, Verdana, Arial, sans-serif;
-}
+    .hero-banner {
+        position: relative;
+        min-height: 80vh;
+        background: url('../img/hero.jpg') no-repeat center/cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        margin: 40px; /* margin 4 baju */
+        border-radius: 15px;
+        overflow: hidden;
+    }
 
-.info-box {
-    background: linear-gradient(135deg, #141e30, #243b55);
-    color: #fff;
-    width: 280px;
-    height: 160px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 15px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-    letter-spacing: 1px;
-}
+    .hero-banner .overlay {
+        background: rgba(0, 0, 0, 0.6);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
 
-.info-box:hover {
-    transform: translateY(-8px) scale(1.05);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-}
+    .hero-banner .hero-content {
+        max-width: 900px;
+        z-index: 10;
+        padding: 40px;
+        animation: fadeInScale 1.2s ease-out forwards;
+    }
 
-.info-box i {
-    font-size: 44px;
-    margin-bottom: 15px;
-    color: #ffd369;
-    transition: 0.3s;
-}
+    @keyframes fadeInScale {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
 
-.info-box:hover i {
-    color: #ffffff;
-}
+    .hero-banner h1 {
+        font-size: 52px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 20px;
+        color: #fff;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    }
 
-.info-box a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 20px;
-    text-transform: uppercase;
-    transition: color 0.3s;
-}
+    .hero-banner p {
+        font-size: 20px;
+        line-height: 1.7;
+        max-width: 700px;
+        margin: 0 auto;
+        color: #f5f5f5;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+    }
 
-.info-box a:hover {
-    color: #ffd369;
-}
+    .hero-btn {
+        display: inline-block;
+        margin-top: 35px;
+        padding: 14px 35px;
+        background: #7c8b38;
+        color: white;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .hero-btn:hover {
+        background: #6f8f2a;
+        transform: translateY(-3px);
+    }
+
+    @media (max-width: 768px) {
+        .hero-banner {
+            margin: 20px;
+            min-height: 60vh;
+        }
+        .hero-banner h1 {
+            font-size: 38px;
+        }
+        .hero-banner p {
+            font-size: 17px;
+            padding: 0 15px;
+        }
+    }
+
+
+
 
 
 /* ABOUT */
@@ -229,11 +258,15 @@ body {
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <h1>Welcome to Hidden Valley Resort</h1>
-    </section>
-
+    <section class="hero-banner">
+    <div class="overlay">
+        <div class="hero-content">
+            <h1>Welcome to Hidden Valley Resort</h1>
+            <p>Luxury, comfort, and tranquility — experience nature's beauty and premium hospitality at Hidden Valley.</p>
+            <a href="about.aspx" class="hero-btn">Discover More</a>
+        </div>
+    </div>
+</section>
    
     <!-- About Section -->
     <section class="about-section">

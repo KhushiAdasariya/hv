@@ -1,100 +1,128 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User/User.Master" AutoEventWireup="true" CodeBehind="login.aspx.cs" Inherits="hv.User.login" %>
+﻿<%@ Page Title="Login - Hidden Valley" Language="C#" MasterPageFile="~/User/User.Master" AutoEventWireup="true" CodeBehind="login.aspx.cs" Inherits="hv.User.login" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="PageTitle" runat="server">
-    login
+    Login
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
-        <style>
+    <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f4f7fa;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fb;
+            margin: 0;
+            padding: 0;
         }
 
-        .form-container {
-            width: 400px;
-            margin: 60px auto;
-            padding: 25px;
-            background: #fff;
+        .login-container {
+            max-width: 400px;
+            margin: 80px auto;
+            padding: 40px 35px;
+            background: #ffffff;
             border-radius: 12px;
-            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
 
-        .form-container h2 {
+        .login-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .login-container h2 {
             text-align: center;
-            margin-bottom: 20px;
-            color: #333;
+            font-size: 28px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 25px;
         }
 
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #444;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #2c3e50;
         }
 
         .form-control {
             width: 100%;
-            padding: 10px;
-            border-radius: 6px;
+            padding: 12px 14px;
             border: 1px solid #ccc;
-            font-size: 14px;
+            border-radius: 8px;
+            font-size: 15px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
         }
 
         .form-control:focus {
-            border-color: #007bff;
+            border-color: #7c8b38;
+            box-shadow: 0 0 6px rgba(124, 139, 56, 0.3);
             outline: none;
         }
 
-        .btn-submit {
+        /* LOGIN BUTTON */
+        .btn-login {
             width: 100%;
-            padding: 10px;
-            background: #007bff;
-            color: white;
-            font-weight: bold;
+            padding: 14px 0;
+            background: #7c8b38;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
             border: none;
-            border-radius: 6px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
 
-        .btn-submit:hover {
-            background: #0056b3;
+        .btn-login:hover {
+            background: #5f6e2b;
+            box-shadow: 0 6px 16px rgba(95, 110, 43, 0.3);
+            transform: translateY(-2px);
         }
 
         .validation-error {
-            color: red;
+            color: #e74c3c;
             font-size: 13px;
+            margin-top: 4px;
             display: block;
         }
 
         #lblMessage {
-            display: block;
             text-align: center;
+            color: #e74c3c;
+            font-weight: 600;
             margin-top: 12px;
-            font-weight: bold;
-            color: red;
         }
 
         .links {
             text-align: center;
-            margin-top: 15px;
+            margin-top: 18px;
         }
 
         .links a {
+            color: #7c8b38;
             text-decoration: none;
-            color: #007bff;
+            font-weight: 500;
         }
 
         .links a:hover {
             text-decoration: underline;
         }
+
+        @media (max-width: 480px) {
+            .login-container {
+                margin: 30px 20px;
+                padding: 30px 25px;
+            }
+        }
     </style>
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <div class="form-container">
+    <div class="login-container">
         <h2>Login</h2>
 
         <div class="form-group">
@@ -120,7 +148,7 @@
                 ValidationExpression="^.{6,}$" CssClass="validation-error"></asp:RegularExpressionValidator>
         </div>
 
-        <asp:Button ID="Button1" runat="server" Text="Login" CssClass="btn-submit" OnClick="Button1_Click" />
+        <asp:Button ID="Button1" runat="server" Text="Login" CssClass="btn-login" OnClick="Button1_Click" />
 
         <asp:Label ID="lblMessage" runat="server"></asp:Label>
 
@@ -128,5 +156,5 @@
             <a href="register.aspx">Register</a> | 
             <a href="forgotpassword.aspx">Forgot Password?</a>
         </div>
-   </div>
+    </div>
 </asp:Content>
