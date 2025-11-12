@@ -11,7 +11,7 @@
         /* ======= HERO SECTION (ROOM PAGE) ======= */
         .hero-banner {
             position: relative;
-            min-height: 65vh; /* same as about page */
+            min-height: 65vh;
             background: url('../img/room1.jpg') no-repeat center/cover;
             display: flex;
             align-items: center;
@@ -45,14 +45,8 @@
         }
 
         @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .hero-banner h1 {
@@ -88,20 +82,6 @@
         .hero-btn:hover {
             background: #6f8f2a;
             transform: translateY(-3px);
-        }
-
-        @media (max-width: 768px) {
-            .hero-banner {
-                margin: 20px;
-                min-height: 55vh;
-            }
-            .hero-banner h1 {
-                font-size: 36px;
-            }
-            .hero-banner p {
-                font-size: 16px;
-                padding: 0 15px;
-            }
         }
 
         /* ======= ROOM CARD SECTION ======= */
@@ -230,38 +210,32 @@
         }
 
         /* ======= PAGINATION STYLE ======= */
-        /* ======= PAGINATION STYLE (MATCH HERO BUTTON) ======= */
-.pagination {
-    text-align: center;
-    margin: 60px 0 20px 0;
-}
+        .pagination {
+            text-align: center;
+            margin: 60px 0 20px 0;
+        }
 
-.page-btn {
-    display: inline-block;
-    margin: 8px;
-    padding: 14px 35px;
-    background: #7c8b38; /* same as hero button */
-    color: white !important;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(124, 139, 56, 0.4);
-    transition: all 0.3s ease;
-}
+        .page-btn {
+            display: inline-block;
+            margin: 8px;
+            padding: 14px 35px;
+            background: #7c8b38;
+            color: white !important;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(124, 139, 56, 0.4);
+            transition: all 0.3s ease;
+        }
 
-.page-btn:hover {
-    background: #6f8f2a; /* hover color same as hero-btn hover */
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(111, 143, 42, 0.5);
-}
-
-.page-btn i {
-    margin: 0 6px;
-}
-
+        .page-btn:hover {
+            background: #6f8f2a;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(111, 143, 42, 0.5);
+        }
 
         /* ======= WHY CHOOSE SECTION ======= */
         .why-choose {
@@ -284,45 +258,6 @@
             color: #555;
             font-size: 18px;
             margin-bottom: 40px;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .feature-box {
-            background: #f9fafc;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .feature-box:hover {
-            background: #ffffff;
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .feature-box i {
-            font-size: 38px;
-            color: #007bff;
-            margin-bottom: 15px;
-        }
-
-        .feature-box h4 {
-            font-size: 20px;
-            color: #111;
-            margin-bottom: 10px;
-        }
-
-        .feature-box p {
-            font-size: 15px;
-            color: #555;
-            line-height: 1.6;
         }
     </style>
 </asp:Content>
@@ -352,7 +287,7 @@
 
                     <div class="room-details">
                         <div class="room-title">
-                            <%# Eval("RoomType") %> - Room No: <%# Eval("RoomNumber") %>
+                            <%# Eval("RoomType") %>
                         </div>
 
                         <div class="room-desc">
@@ -394,35 +329,5 @@
             Next <i class="fa fa-arrow-right"></i>
         </asp:LinkButton>
     </div>
-
-    <!-- ======= WHY CHOOSE OUR ROOMS ======= -->
-    <section class="why-choose">
-        <h2>Why Choose Our Rooms?</h2>
-        <p class="subtitle">Luxury, comfort, and thoughtful design for a perfect getaway.</p>
-        <div class="features">
-            <div class="feature-box">
-                <i class="fa fa-bed"></i>
-                <h4>Elegant Interiors</h4>
-                <p>Beautifully designed rooms with modern amenities and cozy ambiance.</p>
-            </div>
-            <div class="feature-box">
-                <i class="fa fa-bath"></i>
-                <h4>Modern Bathrooms</h4>
-                <p>Relax and refresh in our stylish bathrooms equipped with premium fittings.</p>
-            </div>
-            <div class="feature-box">
-                <i class="fa fa-wifi"></i>
-                <h4>High-Speed WiFi</h4>
-                <p>Seamless internet connectivity to keep you connected during your stay.</p>
-            </div>
-            <div class="feature-box">
-                <i class="fa fa-concierge-bell"></i>
-                <h4>24/7 Service</h4>
-                <p>Our staff is always ready to make your experience comfortable and memorable.</p>
-            </div>
-        </div>
-    </section>
-
-    <div style="height: 60px;"></div>
 
 </asp:Content>

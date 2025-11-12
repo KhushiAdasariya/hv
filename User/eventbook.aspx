@@ -294,6 +294,7 @@
             <tr>
                 <td colspan="2" style="text-align:center">
                     <asp:Button ID="btnSubmit" runat="server" Text="Book Event" CssClass="btn-submit" OnClick="btnSubmit_Click" />
+                    <asp:Button ID="Button1" runat="server" Text="Report" />
                 </td>
             </tr>
         </table>

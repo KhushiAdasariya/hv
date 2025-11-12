@@ -6,63 +6,88 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
     <style>
+        body {
+            background-color: #f3f6fa;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        h2 {
+            font-size: 30px;
+            color: #2c3e50;
+            margin-top: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
         .grid-container {
-            width: 95%;
+            width: 90%;
             margin: 30px auto;
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+            padding: 25px 30px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .grid-container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
         }
 
         .custom-gridview {
             width: 100%;
             border-collapse: collapse;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
             font-size: 15px;
         }
 
         .custom-gridview th {
-            background: #2c3e50;
+            background: linear-gradient(90deg, #34495e, #2c3e50);
             color: #fff;
+            padding: 14px 10px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 14px;
+            letter-spacing: 0.7px;
+            border-bottom: 3px solid #1abc9c;
         }
 
         .custom-gridview td {
             padding: 12px;
-            text-align: center;
-            color: #333;
+            color: #2c3e50;
+            border-bottom: 1px solid #ddd;
         }
 
         .custom-gridview tr:nth-child(even) {
-            background: #f8f9fa;
+            background: #f9fbfc;
         }
 
         .custom-gridview tr:hover {
-            background: #eaf2f8;
-            transition: 0.3s ease-in-out;
+            background: #ecf9f6;
+            transition: all 0.3s ease-in-out;
         }
 
         .custom-gridview .action-button {
-            background: #2c3e50;
-            color: white;
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+            color: #fff;
             border: none;
-            padding: 6px 14px;
-            border-radius: 6px;
+            padding: 7px 15px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
             transition: all 0.3s ease-in-out;
         }
 
         .custom-gridview .action-button:hover {
-            background: #1a252f;
+            background: linear-gradient(90deg, #c0392b, #96281b);
+            transform: scale(1.05);
         }
 
-        h2 {
-            font-size: 28px;
-            color: #2c3e50;
-            margin-bottom: 20px;
+        .card-header {
+            font-size: 18px;
+            color: #16a085;
+            font-weight: 500;
+            margin-bottom: 10px;
         }
     </style>
 </asp:Content>
@@ -71,7 +96,7 @@
     <center>
         <h2>Registered Users</h2>
         <div class="grid-container">
-            <asp:GridView ID="GridView1" runat="server" CssClass="custom-gridview" 
+            <asp:GridView ID="GridView1" runat="server" CssClass="custom-gridview"
                 AutoGenerateColumns="False" AllowPaging="true" PageSize="10"
                 OnPageIndexChanging="GridView1_PageIndexChanging"
                 OnRowCommand="GridView1_RowCommand">
@@ -87,11 +112,11 @@
 
                     <asp:TemplateField HeaderText="Action">
                         <ItemTemplate>
-                            <asp:Button ID="btnEdit" runat="server" CssClass="action-button" Text="Edit" 
-                                CommandName="EditUser" CommandArgument='<%# Eval("Id") %>' />
+                            <asp:Button ID="btnDelete" runat="server" CssClass="action-button" Text="Delete"
+                                CommandName="DeleteUser" CommandArgument='<%# Eval("Id") %>'
+                                OnClientClick="return confirm('Are you sure you want to delete this user?');" />
                         </ItemTemplate>
                     </asp:TemplateField>
-
                 </Columns>
             </asp:GridView>
         </div>

@@ -9,6 +9,9 @@ namespace hv.Admin
     public partial class Reports : System.Web.UI.Page
     {
         string s = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+        SqlConnection con;
+        SqlDataAdapter da;
+        DataSet ds;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -18,18 +21,23 @@ namespace hv.Admin
             }
         }
 
-        private void BindGrid()
+        void getcon()
         {
-            using (SqlConnection con = new SqlConnection(s))
+            con = new SqlConnection(s);
+            if (con.State != System.Data.ConnectionState.Open)
             {
-                string query = "SELECT ID, Name, Email, Phone, Message, CreatedDate FROM ContactMessages ORDER BY CreatedDate DESC";
-                SqlDataAdapter da = new SqlDataAdapter(query, con);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                GridView1.DataSource = dt;
-                GridView1.DataBind();
+                con.Open();
             }
+        }
+
+        void BindGrid()
+        {
+            getcon();
+            da = new SqlDataAdapter("SELECT ID, Name, Email, Phone, Message, CreatedDate FROM ContactMessages ORDER BY CreatedDate DESC", con);
+            ds = new DataSet();
+            da.Fill(ds);
+            GridView1.DataSource = ds;
+            GridView1.DataBind();
         }
 
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)

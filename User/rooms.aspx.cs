@@ -13,7 +13,7 @@ namespace hv.User
         SqlDataAdapter da;
         DataSet ds;
 
-        int pagesize = 1;   // 6 rooms per page
+        int pagesize = 1;
         static int pageindex = 0;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -37,14 +37,12 @@ namespace hv.User
             ds = new DataSet();
             da.Fill(ds);
 
-            // PAGINATION LOGIC
             PagedDataSource pds = new PagedDataSource();
             pds.DataSource = ds.Tables[0].DefaultView;
             pds.AllowPaging = true;
             pds.PageSize = pagesize;
             pds.CurrentPageIndex = pageindex;
 
-            // Enable/Disable Buttons
             lnkprev.Enabled = !pds.IsFirstPage;
             lnknxt.Enabled = !pds.IsLastPage;
 
@@ -52,7 +50,6 @@ namespace hv.User
             DataList1.DataBind();
         }
 
-        // Previous Button
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
             if (pageindex > 0)
@@ -62,24 +59,20 @@ namespace hv.User
             }
         }
 
-        // Next Button
         protected void LinkButton2_Click(object sender, EventArgs e)
         {
             pageindex++;
             filllist();
         }
 
-        // BOOK NOW + VIEW DETAILS
         protected void DataList1_ItemCommand(object source, DataListCommandEventArgs e)
         {
-            // BOOK NOW
             if (e.CommandName == "cmd_book")
             {
                 string id = e.CommandArgument.ToString();
-                Response.Redirect("bookroom.aspx?id=" + id);
+                Response.Redirect("booking.aspx?id=" + id);
             }
 
-            // VIEW DETAILS
             if (e.CommandName == "cmd_view")
             {
                 string id = e.CommandArgument.ToString();

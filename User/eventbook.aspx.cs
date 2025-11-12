@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
 using System.Web.UI;
-
+using System.Web.UI.WebControls;
+using System.Xml.Linq;
 namespace hv.User
 {
     public partial class eventbook : System.Web.UI.Page
@@ -10,6 +15,12 @@ namespace hv.User
         string s = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         SqlConnection con;
         SqlCommand cmd;
+        SqlDataAdapter da; //Container
+        DataSet ds;
+        private CrystalDecisions.CrystalReports.Engine.ReportDocument
+cr = new
+CrystalDecisions.CrystalReports.Engine.ReportDocument();
+        static string Crypath = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -55,6 +66,16 @@ namespace hv.User
                 clear();
                 Response.Redirect("index.aspx");
             }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            
+            da = new SqlDataAdapter("select* from EventBooking", con);
+            ds = new DataSet();
+            da.Fill(ds);
+            string xml = @"E:\ASP.net\hv\User\EventBook.xml";
+            ds.WriteXmlSchema(xml);
         }
     }
 }

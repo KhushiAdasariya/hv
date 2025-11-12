@@ -24,15 +24,6 @@ namespace hv.Admin
         protected global::System.Web.UI.WebControls.TextBox txtRoomType;
 
         /// <summary>
-        /// txtRoomNumber control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRoomNumber;
-
-        /// <summary>
         /// txtDescription control.
         /// </summary>
         /// <remarks>
@@ -58,15 +49,6 @@ namespace hv.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCapacity;
-
-        /// <summary>
-        /// ddlStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
 
         /// <summary>
         /// fldimg control.

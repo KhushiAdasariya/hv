@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -13,38 +10,51 @@ namespace hv.Admin
     public partial class ManageWedding : System.Web.UI.Page
     {
         string s = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+        SqlConnection con;
+        SqlDataAdapter da;
+        DataSet ds;
+        SqlCommand cmd;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                BindGrid();
+                FillGrid();
             }
         }
-        private void BindGrid()
-        {
-            using (SqlConnection con = new SqlConnection(s))
-            {
-                string query = "SELECT BookingID, FullName, MobileNo, Email, Gender, City, State, EventType, EventDate, EventTime, VenueName, Guests, Theme, RoomsRequired, Rooms, CheckInDate, CheckOutDate, CreatedDate FROM EventBooking";
-                SqlDataAdapter da = new SqlDataAdapter(query, con);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
 
-                GridView1.DataSource = dt;
-                GridView1.DataBind();
+        void GetCon()
+        {
+            con = new SqlConnection(s);
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
             }
+        }
+
+        void FillGrid()
+        {
+            GetCon();
+            da = new SqlDataAdapter("SELECT BookingID, FullName, MobileNo, Email, EventType, EventDate, VenueName, Guests, City, State, Theme, Rooms, CreatedDate FROM EventBooking ORDER BY CreatedDate DESC", con);
+            ds = new DataSet();
+            da.Fill(ds);
+            GridView1.DataSource = ds;
+            GridView1.DataBind();
         }
 
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             GridView1.PageIndex = e.NewPageIndex;
-            BindGrid();
+            FillGrid();
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string bookingId = GridView1.SelectedRow.Cells[0].Text;
-            Response.Write("<script>alert('Selected Booking ID: " + bookingId + "');</script>");
+            GridViewRow row = GridView1.SelectedRow;
+            string bookingId = row.Cells[0].Text;
+
+            // Redirect to details page for selected booking
+            Response.Redirect("ViewWeddingDetails.aspx?BookingID=" + bookingId);
         }
     }
 }

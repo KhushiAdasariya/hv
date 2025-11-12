@@ -1,7 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Xml.Linq;
 
 namespace hv.User
 {
@@ -10,6 +16,8 @@ namespace hv.User
         string s = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         SqlConnection con;
         SqlCommand cmd;
+        SqlDataAdapter da; //Container
+        DataSet ds;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -76,13 +84,6 @@ namespace hv.User
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "alert", $"alert('Booking Failed: {ex.Message.Replace("'", "")}');", true);
-            }
-            finally
-            {
-                if (con != null && con.State == System.Data.ConnectionState.Open)
-                {
-                    con.Close();
-                }
             }
         }
     }

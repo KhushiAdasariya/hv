@@ -251,6 +251,7 @@
                 <div class="submit-button-container full-width">
                     <p style="color:#2c3e50; font-size:15px; margin-bottom:15px;">By clicking 'Confirm & Pay', you agree to our <a href="#" style="color:#7c8b38; text-decoration:none;">Terms & Conditions</a>.</p>
                     <asp:Button ID="btnSubmitBooking" runat="server" Text="Confirm & Reserve Your Stay" CssClass="booking-submit-btn" OnClick="btnSubmitBooking_Click" />
+                    
                 </div>
             </div>
         </asp:Panel>

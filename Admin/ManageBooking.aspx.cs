@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace hv.Admin
 {
-    public partial class Manageregisteration : System.Web.UI.Page
+    public partial class ManageBooking : System.Web.UI.Page
     {
         string s = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         SqlConnection con;
@@ -26,7 +26,7 @@ namespace hv.Admin
         void GetCon()
         {
             con = new SqlConnection(s);
-            if (con.State == ConnectionState.Closed)
+            if (con.State != ConnectionState.Open)
             {
                 con.Open();
             }
@@ -35,7 +35,7 @@ namespace hv.Admin
         void FillGrid()
         {
             GetCon();
-            da = new SqlDataAdapter("SELECT * FROM stu_tbl", con);
+            da = new SqlDataAdapter("SELECT * FROM EventBooking ORDER BY BookingID DESC", con);
             ds = new DataSet();
             da.Fill(ds);
             GridView1.DataSource = ds;
@@ -50,30 +50,30 @@ namespace hv.Admin
 
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "DeleteUser")
+            if (e.CommandName == "DeleteBooking")
             {
-                int id = Convert.ToInt32(e.CommandArgument);
-                DeleteUser(id);
+                int bookingID = Convert.ToInt32(e.CommandArgument);
+                DeleteBooking(bookingID);
                 FillGrid();
 
                 ScriptManager.RegisterStartupScript(this, GetType(), "msg",
-                    "alert('User deleted successfully!');", true);
+                    "alert('Booking deleted successfully!');", true);
             }
         }
 
-        void DeleteUser(int id)
+        void DeleteBooking(int id)
         {
             try
             {
                 GetCon();
-                cmd = new SqlCommand("DELETE FROM stu_tbl WHERE Id=@Id", con);
-                cmd.Parameters.AddWithValue("@Id", id);
+                cmd = new SqlCommand("DELETE FROM EventBooking WHERE BookingID=@BookingID", con);
+                cmd.Parameters.AddWithValue("@BookingID", id);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "err",
-                    "alert('Error deleting record: " + ex.Message + "');", true);
+                    "alert('Error deleting booking: " + ex.Message.Replace("'", "") + "');", true);
             }
         }
     }

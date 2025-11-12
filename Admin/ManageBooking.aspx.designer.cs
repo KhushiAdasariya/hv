@@ -11,25 +11,16 @@ namespace hv.Admin
 {
 
 
-    public partial class Dashboard
+    public partial class ManageBooking
     {
 
         /// <summary>
-        /// lblTotalUsers control.
+        /// GridView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalUsers;
-
-        /// <summary>
-        /// lblTotalBookings control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalBookings;
+        protected global::System.Web.UI.WebControls.GridView GridView1;
     }
 }
